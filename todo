@@ -1,6 +1,0 @@
-1.test transfer event
-2.test breed
-3.test sell
-4. test buy card
-
-vuetify奇怪问题：如果声明了v-model，却没在data处定义，很可能不起作用

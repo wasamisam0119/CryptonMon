@@ -1,14 +1,12 @@
-# CryptoVipers
+# CryptoMon
 
-A simple Ethereum-based [CryptoKitties](https://www.cryptokitties.co/)-like decentralized application (dapp) where you can own, buy, and breed vipers.
+A simple Ethereum-based [CryptoKitties](https://www.cryptokitties.co/)-like decentralized application (dapp) where you can own, buy, trade, fight and breed pokemon.
 
-This repository is used in this Medium article:
 
-https://medium.com/@sbenemerito/creating-a-cryptokitties-like-dapp-5115efc9e0bb
 
 ---
 
-![CryptoVipers](https://i.imgur.com/pBY8VX2.gif)
+![CryptoVipers](./sell.gif)
 
 
 ## Prerequisites
@@ -21,8 +19,8 @@ https://medium.com/@sbenemerito/creating-a-cryptokitties-like-dapp-5115efc9e0bb
 Clone this repo via to your local machine and install the dependencies by doing the following:
 
 ```bash
-git clone https://github.com/openberry-ac/cryptovipers.git
-cd cryptovipers
+git clone https://github.com/wasamisam0119/CryptonMon.git
+cd CryptonMon
 npm install
 ```
 
@@ -32,36 +30,68 @@ Serve the application with hot reload in a development environment via:
 npm run dev
 ```
 
-### Boilerplate
-
-If it is only the boilerplate that you want to clone, do it via:
-
-```
-git clone https://github.com/openberry-ac/cryptovipers.git --branch boilerplate --single-branch
-```
-
-And then do the same following commands as shown above for starting the application, you should be all set by then.
-
 ## Built With
 
 * [Solidity](https://solidity.readthedocs.io/en/v0.5.3/) - Ethereum's smart contract programming language
 * [Vue.js](https://vuejs.org/) - The Javascript framework used
 * [web3.js](https://github.com/ethereum/web3.js/) - Javascript library used to interact with the Ethereum blockchain
 
-## openberry
+## Market  
 
-Anyone can become a blockchain engineer!
+You can either buy and sell cryptomons from/on the market. Just put some gas, no extra cost!
 
-openberry is a tutorial marketplace, designed to enable anyone to learn blockchain programming.
+![market](./sell.gif)
 
-**Website:**
+## Fight
 
-https://openberry.ac/
+You can fight with other crypotomon by simply type in the id, and if you wins, your cryptomon will get some HP reward! 
 
-**Medium:**
+![CryptoVipers](./fight.gif)
 
-https://medium.com/openberry
+###Implementation:
 
-**Twitter:**
 
-https://twitter.com/openberry_ac
+
+
+## Share 
+
+You are allowed to give their crypotomon to others, as long as you know his/her public address.
+
+![CryptoVipers](./give.gif)
+
+## Breed
+You can breed a new crypotomon from two cryptomon, and probably the new crypotomon will inherite good genes from  their parents!
+![CryptoVipers](./fight.gif) 
+
+##Security
+The contract implements ERC721 token standard and inherite from **openzeppelin-ERC721** which already ensure some security function.
+
+### Overflow and underflow--SafeMath
+
+It is very common to use unsigned integer in solidity like uint8, but we can see simple overflow example as below:
+
+```python
+uint8 number = 255;
+number++;
+```
+
+ I use openzeppelin's safemath implementation to aviod the problem:
+
+```solidity
+using SafeMath for uint8;
+```
+
+```java
+function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        require(c >= a, "SafeMath: addition overflow");
+
+        return c;
+    }
+```
+
+### Reentrancy Attack
+
+I researched on solidity docs, and the `.transfer()` has already prevent reentrancy attack to some extent:
+
+![attack](./Pics/attack.png)
